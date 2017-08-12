@@ -24,5 +24,6 @@ public class CDPlayerTest {
     @Test
     public void cdShouldNotBeNull() {
         player.play();
+        player.play();
     }
 }
