@@ -1,5 +1,6 @@
 package com.derek.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
@@ -9,4 +10,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class CDPlayerConfig {
+
+    @Bean
+    public CompactDisc getCompactDisc() {
+        return new SgtPeppers();
+    }
+
+    @Bean
+    public MediaPlayer getMediaPlayer(CompactDisc cd) {
+        return new CDPlayer(cd);
+    }
 }
