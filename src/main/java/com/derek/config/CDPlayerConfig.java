@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class CDPlayerConfig {
 
     @Bean
-    public CompactDisc getCompactDisc() {
+    public CompactDisc compactDisc() {
         return new SgtPeppers();
     }
 
