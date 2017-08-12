@@ -8,8 +8,5 @@ import org.springframework.context.annotation.Configuration;
  * Created by qux on 12/8/17.
  */
 @Configuration
-@ComponentScan(basePackages = "com.derek.config")
-//@ComponentScan(basePackages = {"com.derek.config"})
-//@ComponentScan(basePackageClasses = {SgtPeppers.class})
 public class CDPlayerConfig {
 }

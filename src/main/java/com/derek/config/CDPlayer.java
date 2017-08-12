@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by qux on 12/8/17.
  */
-@Component
 public class CDPlayer implements MediaPlayer {
 
     @Autowired
