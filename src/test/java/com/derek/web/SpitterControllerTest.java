@@ -1,8 +1,15 @@
 package com.derek.web;
 
+import com.derek.AppConfig;
 import com.derek.model.Spitter;
 import com.derek.repository.SpitterRepository;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.*;
@@ -15,7 +22,28 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 /**
  * Created by qux on 20/8/17.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes=AppConfig.class)
+@WebAppConfiguration
 public class SpitterControllerTest {
+
+
+    @Autowired
+    SpitterController mSpitterController;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    @Test
+    public void testSpitterController() throws Exception {
+        MockMvc mockMvc = standaloneSetup(mSpitterController).build();
+
+        mockMvc.perform(post("/spitter/register")
+                .param("username", "Derek")
+                .param("password", "1234567890"))
+                .andExpect(redirectedUrl("/spitter/Derek"));
+
+    }
 
     @Test
     public void shouldShowRegiterationMap() throws Exception {

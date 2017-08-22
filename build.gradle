@@ -1,5 +1,5 @@
 group 'com.derek'
-version '1.0-SNAPSHOT'
+version '1'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -27,4 +27,8 @@ dependencies {
     testCompile "junit:junit-dep:$junitVersion"
     testCompile "org.springframework:spring-test:$springVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"
+}
+
+war {
+    baseName = 'spring'
 }
