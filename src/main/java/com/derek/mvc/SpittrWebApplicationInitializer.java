@@ -1,7 +1,9 @@
 package com.derek.mvc;
 
+import com.derek.servlet.LogFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -41,5 +43,13 @@ public class SpittrWebApplicationInitializer extends AbstractAnnotationConfigDis
          * 设置启动优先级
          */
         //registration.setLoadOnStartup(5);
+    }
+
+    /**
+     * 只会对 DispatchServlet 有效
+     */
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] {new LogFilter()};
     }
 }
