@@ -1,11 +1,8 @@
 package com.derek.web;
 
 import com.derek.model.Spittle;
-import com.derek.mvc.SpittrWebApplicationInitializer;
 import com.derek.repository.SpittleRepository;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 

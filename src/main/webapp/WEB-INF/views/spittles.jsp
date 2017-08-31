@@ -25,7 +25,7 @@
           <li id="spittle_<c:out value="spittle.id"/>">
             <div class="spittleMessage"><c:out value="${spittle.message}" /></div>
             <div>
-              <span class="spittleTime"><c:out value="${spittle.time}" /></span>
+              <span class="spittleTime"><c:out value="${spittle.timestamp}" /></span>
             </div>
           </li>
         </c:forEach>

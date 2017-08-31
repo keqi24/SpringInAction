@@ -1,7 +1,7 @@
 package com.derek;
 
-import com.derek.mvc.RootConfig;
-import com.derek.mvc.WebConfig;
+import com.derek.config.RootConfig;
+import com.derek.web.WebConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

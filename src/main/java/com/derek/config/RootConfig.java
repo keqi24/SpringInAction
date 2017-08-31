@@ -1,4 +1,4 @@
-package com.derek.mvc;
+package com.derek.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
