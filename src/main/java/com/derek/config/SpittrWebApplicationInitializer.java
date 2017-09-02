@@ -50,6 +50,7 @@ public class SpittrWebApplicationInitializer extends AbstractAnnotationConfigDis
      */
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[] {new LogFilter()};
+//        return new Filter[] {new LogFilter()};
+        return new Filter[]{};
     }
 }

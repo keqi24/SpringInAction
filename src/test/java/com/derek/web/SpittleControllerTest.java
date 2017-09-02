@@ -2,6 +2,7 @@ package com.derek.web;
 
 import com.derek.model.Spittle;
 import com.derek.repository.SpittleRepository;
+import com.derek.web.exception.DuplicateSpittleException;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -62,6 +63,38 @@ public class SpittleControllerTest {
                 .andExpect(model().attribute("spittle", expectedSpittle));
 
     }
+
+    @Test
+    public void testSaveSpittleError() throws Exception {
+        SpittleRepository mockRepository = mock(SpittleRepository.class);
+        doThrow(new DuplicateSpittleException()).when(mockRepository).save(any(Spittle.class));
+
+        SpittleController controller = new SpittleController();
+        controller.setSpittleRepository(mockRepository);
+        MockMvc mockMvc = standaloneSetup(controller).build();
+
+        mockMvc.perform(post("/spittles")
+                .param("message", "Hello World")
+                )
+                .andExpect(view().name("error/duplicate"));
+    }
+
+    @Test
+    public void testSaveSpittle() throws Exception {
+        SpittleRepository mockRepository = mock(SpittleRepository.class);
+
+        SpittleController controller = new SpittleController();
+        controller.setSpittleRepository(mockRepository);
+        MockMvc mockMvc = standaloneSetup(controller).build();
+
+        mockMvc.perform(post("/spittles")
+                .param("message", "Hello World")
+        )
+                .andExpect(redirectedUrl("/spittles"));
+
+        verify(mockRepository, atLeastOnce()).save(new Spittle(0, "Hello World", 0));
+    }
+
 
 
     private List<Spittle> createSpittleList(int count) {

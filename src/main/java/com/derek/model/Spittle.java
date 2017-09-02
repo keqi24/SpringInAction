@@ -30,6 +30,18 @@ public class Spittle {
         return timestamp;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,7 +50,6 @@ public class Spittle {
         Spittle spittle = (Spittle) o;
 
         if (id != spittle.id) return false;
-        if (timestamp != spittle.timestamp) return false;
         return message != null ? message.equals(spittle.message) : spittle.message == null;
 
     }
@@ -47,7 +58,6 @@ public class Spittle {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (message != null ? message.hashCode() : 0);
-        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
         return result;
     }
 }

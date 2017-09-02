@@ -2,13 +2,11 @@ package com.derek.web;
 
 import com.derek.model.Spittle;
 import com.derek.repository.SpittleRepository;
+import com.derek.web.exception.DuplicateSpittleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,5 +47,16 @@ public class SpittleController {
     ) {
         model.addAttribute("spittle", spittleRepository.findOne(spittleId));
         return "spittle";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String saveSpittle(SpittleForm form, Model model) {
+        spittleRepository.save(new Spittle(0, form.getMessage(), System.currentTimeMillis()));
+        return "redirect:/spittles";
+    }
+
+    @ExceptionHandler(DuplicateSpittleException.class)
+    public String handleDuplicateError() {
+        return "error/duplicate";
     }
 }

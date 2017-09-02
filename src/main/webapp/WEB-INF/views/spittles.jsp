@@ -12,8 +12,6 @@
     <div class="spittleForm">
       <h1>Spit it out...</h1>
       <form method="POST" name="spittleForm">
-        <input type="hidden" name="latitude">
-        <input type="hidden" name="longitude">
         <textarea name="message" cols="80" rows="5"></textarea><br/>
         <input type="submit" value="Add" />
       </form>

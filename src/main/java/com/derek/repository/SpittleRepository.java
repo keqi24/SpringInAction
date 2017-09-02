@@ -10,4 +10,5 @@ import java.util.List;
 public interface SpittleRepository {
     List<Spittle> findSpittle(long max, int count);
     Spittle findOne(long id);
+    void save(Spittle spittle);
 }

@@ -2,6 +2,7 @@ package com.derek.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,25 +15,38 @@ public class Spitter {
     private long id;
 
     @NotNull
-    @Size(min = 4, max = 16)
+    @Size(min = 4, max = 16, message = "user name must be more than 4 less than 16")
     private String username;
 
     @NotNull
-    @Size(min = 8, max = 20)
+    @Email
+    private String email;
+
+    @NotNull
+    @Size(min = 8, max = 20, message = "password must be more than 8 less than 20")
     private String password;
 
     public Spitter() {
 
     }
 
-    public Spitter(String username, String password) {
-        this(0, username, password);
+    public Spitter(String email, String username, String password) {
+        this(0, email, username, password);
     }
 
-    public Spitter(long id, String username, String password) {
+    public Spitter(long id, String email, String username, String password) {
         this.id = id;
+        this.email = email;
         this.username = username;
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {
@@ -59,6 +73,7 @@ public class Spitter {
         this.password = password;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,8 +83,8 @@ public class Spitter {
         Spitter spitter = (Spitter) o;
 
         return new EqualsBuilder()
-                .append(id, spitter.id)
                 .append(username, spitter.username)
+                .append(email, spitter.email)
                 .append(password, spitter.password)
                 .isEquals();
     }
@@ -77,8 +92,8 @@ public class Spitter {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(id)
                 .append(username)
+                .append(email)
                 .append(password)
                 .toHashCode();
     }
