@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by qux on 20/8/17.
@@ -36,20 +39,18 @@ public class SpitterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistration(
-            @Valid Spitter spitter,
+            @Valid SpitterForm spitterForm,
             Errors errors
-    ) {
+    ) throws IOException {
 
-        System.out.println(spitter.getUsername() + ",  "+ spitter.getPassword());
         if (errors.hasErrors()) {
-            for (ObjectError error : errors.getAllErrors()) {
-                System.out.println(error.toString());
-            }
             return "registerForm";
         }
 
+        Spitter spitter = spitterForm.toSpitter();
         spitterRepository.save(spitter);
-
+        MultipartFile profilePicture = spitterForm.getProfilePicture();
+        profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername()));
         return "redirect:/spitter/" + spitter.getUsername();
     }
 
