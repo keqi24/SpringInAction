@@ -5,6 +5,7 @@ import com.derek.web.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 /**
@@ -37,7 +38,7 @@ public class SpittrWebApplicationInitializer extends AbstractAnnotationConfigDis
          * 开启多multipart支持
          * 并将相传的临时存储目录设置到 /tmp/spring/uploads
          */
-        //registration.setMultipartConfig(new MultipartConfigElement("/tmp/spring/uploads"));
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp/spring/uploads", 2097152, 4194304, 0));
 
         /**
          * 设置启动优先级

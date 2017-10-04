@@ -24,7 +24,9 @@ public class DefaultSpitterRespository implements SpitterRepository {
         if (userName == null || userName.length() ==0) {
             return null;
         }
-        Spitter[] spitters = (Spitter[]) spitterList.toArray();
+
+        Spitter[] spitters = new Spitter[spitterList.size()];
+        spitterList.toArray(spitters);
 
         for (Spitter spitter : spitters) {
             if (userName.equals(spitter.getUsername())){
